@@ -1,0 +1,53 @@
+<mat-toolbar color="secondary">
+  <mat-toolbar-row>
+    <span>Add Project</span>
+    <span class="spacer"></span>
+    <a routerLink="/projects"><mat-icon class="icon" aria-hidden="false" aria-label="Cancel" matTooltip="Cancel">cancel</mat-icon></a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container">
+  <div *ngIf="!submitted" class="mat-form">
+    <mat-form-field class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput required placeholder="" [(ngModel)]="project.name" name="name" type="text">
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput required placeholder="" [(ngModel)]="project.description" name="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Duration</mat-label>
+      <input matInput placeholder="" value="" type="number" required placeholder="" [(ngModel)]="project.duration" name="duration">
+    </mat-form-field>
+
+    <input
+      type="file"
+      class="form-control"
+      id="avatar"
+      required
+      (change)="onFileSelect($event)"
+      name="avatar"
+    /> <br>
+
+    <button 
+      mat-raised-button
+      style="margin: 30px 0px"
+      aria-label="Button that displays a tooltip when focused or hovered over"
+      (click)="saveProject()"
+    >
+    Submit
+    
+    </button>
+</div>
+<div *ngIf="submitted" class="sub-container">
+  <h4>You submitted successfully!</h4>
+  <button 
+  mat-raised-button
+  aria-label="Button that displays a tooltip when focused or hovered over"
+  (click)="newProject()"
+  > Add </button>
+</div>
+</div>

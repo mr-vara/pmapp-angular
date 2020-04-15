@@ -1,0 +1,44 @@
+<mat-toolbar color="secondary" *ngIf="projectId && currentSubTask">
+  <mat-toolbar-row>
+    <span>Edit Sub Task</span>
+    <span class="spacer"></span>
+    <a routerLink="/project/{{ projectId }}/task/{{currentSubTask.task}}/sub-task/{{currentSubTask.id}}"><mat-icon class="icon" aria-hidden="false" aria-label="Cancel" matTooltip="Cancel">cancel</mat-icon></a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container">
+  <div *ngIf="currentSubTask" class="mat-form">
+    <mat-form-field class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput required placeholder="" [(ngModel)]="currentSubTask.name" name="name" type="text">
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput required placeholder="" [(ngModel)]="currentSubTask.description" name="description"></textarea>
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Start Date</mat-label>
+      <input matInput required placeholder="" [(ngModel)]="currentSubTask.start_date" name="start_date" type="text">
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>End Date</mat-label>
+      <input matInput required placeholder="" [(ngModel)]="currentSubTask.end_date" name="end_date" type="text">
+    </mat-form-field>
+
+    <button 
+      mat-raised-button
+      style="margin: 30px 0px"
+      aria-label="Button that displays a tooltip when focused or hovered over"
+      (click)="updateSubTask()"
+    >
+    Submit
+    
+    </button>
+</div>
+<div *ngIf="!currentSubTask" class="sub-container">
+  <h4>Task not found!</h4>
+</div>
+</div>

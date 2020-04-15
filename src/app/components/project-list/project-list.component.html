@@ -1,0 +1,21 @@
+<mat-toolbar color="secondary">
+  <mat-toolbar-row>
+    <span>Projects</span>
+    <span class="spacer"></span>
+    <a routerLink="/project/add"><mat-icon class="icon" aria-hidden="false" aria-label="Add new project" matTooltip="Add new project">add_circle</mat-icon></a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-list *ngIf="projects">
+  <a mat-list-item routerLink="/project/{{ project.id }}" *ngFor="let project of projects">
+    <img matListAvatar src="{{ project.avatar.replace('/api/projects/pmapp', '') }}" alt="Avatar">
+    <div mat-line>{{project.name}}</div>
+    <div mat-line> {{project.duration}} months </div>
+  </a>
+</mat-list>
+
+<div class="sub-container">
+  <div *ngIf="!projects">
+    <span>No projects found</span><a mat-list-item href="/project/add">Add new</a>
+  </div>
+</div>

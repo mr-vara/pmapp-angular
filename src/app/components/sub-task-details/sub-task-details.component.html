@@ -1,0 +1,38 @@
+<mat-toolbar color="secondary" *ngIf="project && currentSubTask">
+  <mat-toolbar-row>
+    <span>Sub Task</span>
+    <span class="spacer"></span>
+    <a routerLink="/project/{{ project }}/task/{{ currentSubTask.task }}"><mat-icon class="icon" aria-hidden="false" aria-label="Example delete icon" matTooltip="Cancel">cancel</mat-icon></a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-card *ngIf="currentSubTask">
+  <mat-card-content>
+    <h3>{{ currentSubTask.name }}</h3>
+    <p> {{ currentSubTask.description }} </p>
+    <mat-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon matTooltip="Start Date">date_range</mat-icon>
+        <div mat-line>Start date</div>
+        <div mat-line> {{currentSubTask.start_date | date}} </div>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon matTooltip="End Date">update</mat-icon>
+        <div mat-line>End date</div>
+        <div mat-line> {{currentSubTask.end_date | date}} </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  
+  <mat-card-actions>
+    <div class="button-row">
+      <a routerLink="/project/{{project}}/task/{{currentSubTask.task}}/sub-task/{{currentSubTask.id}}/edit" mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" matTooltip="Edit Sub Task">
+        <mat-icon>edit</mat-icon>
+      </a>
+      <button (click)="deleteSubTask()" mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" matTooltip="Delete Sub Task">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,53 @@
+<mat-toolbar color="secondary">
+  <mat-toolbar-row>
+    <span>Add Sub Task</span>
+    <span class="spacer"></span>
+    <a routerLink="/project/{{ project }}/task/{{ subTask.task }}"><mat-icon class="icon" aria-hidden="false" aria-label="Cancel" matTooltip="Cancel">cancel</mat-icon></a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container">
+  <div *ngIf="!submitted" class="mat-form">
+    <mat-form-field class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput required placeholder="" [(ngModel)]="subTask.name" name="name" type="text">
+    </mat-form-field>
+  
+    <mat-form-field class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput required placeholder="" [(ngModel)]="subTask.description" name="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Start Date</mat-label>
+      <input matInput required [matDatepicker]="picker" [(ngModel)]="subTask.start_date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>End Date</mat-label>
+      <input matInput required [matDatepicker]="picker2" [(ngModel)]="subTask.end_date">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <button 
+      mat-raised-button
+      style="margin: 30px 0px"
+      aria-label="Button that displays a tooltip when focused or hovered over"
+      (click)="saveSubTask()"
+    >
+    Submit
+    
+    </button>
+</div>
+<div *ngIf="submitted" class="sub-container">
+  <h4>You submitted successfully!</h4>
+  <button 
+  mat-raised-button
+  aria-label="Button that displays a tooltip when focused or hovered over"
+  (click)="newSubTask()"
+  > Add </button>
+</div>
+</div>

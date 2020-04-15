@@ -1,0 +1,66 @@
+<mat-toolbar color="secondary" *ngIf="currentTask">
+  <mat-toolbar-row>
+    <span>Task</span>
+    <span class="spacer"></span>
+    <a routerLink="/project/{{ currentTask.project }}"><mat-icon class="icon" aria-hidden="false" aria-label="Example delete icon" matTooltip="Cancel">cancel</mat-icon></a>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-card *ngIf="currentTask">
+  <mat-card-content>
+    <h3>{{ currentTask.name }}</h3>
+    <p> {{ currentTask.description }} </p>
+    <mat-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon matTooltip="Start Date">date_range</mat-icon>
+        <div mat-line>Start date</div>
+        <div mat-line> {{currentTask.start_date | date}} </div>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon matTooltip="End Date">update</mat-icon>
+        <div mat-line>End date</div>
+        <div mat-line> {{currentTask.end_date | date}} </div>
+      </mat-list-item>
+    </mat-list>
+    <h3 *ngIf="currentTask.sub_tasks.length > 0">Sub Tasks</h3>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let sub_task of currentTask.sub_tasks">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ sub_task.name }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div> {{ sub_task.description }} </div>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon mat-list-icon matTooltip="Start Date">date_range</mat-icon>
+            <div mat-line>Start date</div>
+            <div mat-line> {{sub_task.start_date | date}} </div>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon mat-list-icon matTooltip="End Date">update</mat-icon>
+            <div mat-line>End date</div>
+            <div mat-line> {{sub_task.end_date | date}} </div>
+          </mat-list-item>
+        </mat-list>
+        <mat-action-row>
+          <a routerLink="/project/{{currentTask.project}}/task/{{currentTask.id}}/sub-task/{{sub_task.id}}" mat-button color="primary">VIEW MORE</a>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="button-row">
+      <a routerLink="/project/{{currentTask.project}}/task/{{currentTask.id}}/sub-task/add" mat-icon-button aria-label=" " matTooltip="Add Sub Task">
+        <mat-icon>add_circle</mat-icon>
+      </a>
+      <a routerLink="/project/{{currentTask.project}}/task/{{currentTask.id}}/edit" mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" matTooltip="Edit Task">
+        <mat-icon>edit</mat-icon>
+      </a>
+      <button (click)="deleteTask()" mat-icon-button color="primary" aria-label="Example icon-button with a heart icon" matTooltip="Delete Project">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+
+  </mat-card-actions>
+</mat-card>
